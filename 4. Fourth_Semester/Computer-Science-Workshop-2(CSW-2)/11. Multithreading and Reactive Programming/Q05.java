@@ -36,7 +36,7 @@ public class Q05 {
 
         Thread incrementThread = new Thread(() -> {
             for (int i = 0; i < 5; i++) {
-                Q05.increment();
+                Q1.increment();
                 try {
                     Thread.sleep(100); // Simulating some work
                 } catch (InterruptedException e) {
