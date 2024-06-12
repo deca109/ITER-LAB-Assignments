@@ -11,7 +11,7 @@ public class Q05 {
     private static int resource = 0;
     private static Lock lock = new ReentrantLock();
 
-    public static void increment() {
+    public void increment() {
         lock.lock();
         try {
             resource++;
@@ -36,7 +36,7 @@ public class Q05 {
 
         Thread incrementThread = new Thread(() -> {
             for (int i = 0; i < 5; i++) {
-                Q1.increment();
+                sharedResource.increment();
                 try {
                     Thread.sleep(100); // Simulating some work
                 } catch (InterruptedException e) {
