@@ -18,25 +18,26 @@
  * CODE
  */
 
+import java.util.*;
 public class CoinExchange {
-    public static int coinChange(int[] coins, int amount) {
-        int[] dp = new int[amount + 1];
-        dp[0] = 1;
-        for (int coin : coins) {
-            for (int i = coin; i <= amount; i++) {
-                dp[i] += dp[i - coin];
-            }
-        }
-        return dp[amount];
-    }
-
-    public static void main(String[] args) {
-        int[] coins = {1, 2, 5};
-        int amount = 12;
-
-        int ways = coinChange(coins, amount);
-        System.out.println("Number of ways to make change for "+amount+" is : "+ways);
-    }
+	public static void main(String args[]) {
+		int denominations[]= {1,2,5};
+		int sum=7;
+		System.out.println("Least number of coins required = " + solver(sum,denominations));
+	}
+	public static int solver(int sum,int[] coins) {
+		int[][] dp=new int[coins.length+1][sum+1];
+		dp[0][0]=1;
+		
+		for(int i=1;i<=coins.length;i++) {
+			for(int j=0;j<=sum;j++) {
+				dp[i][j]+=dp[i-1][j]; //using coins other than current coin
+				if(j-coins[i-1]>=0)
+				dp[i][j]+=dp[i][j-coins[i-1]]; //using the current coin
+			}
+		}
+		return dp[coins.length][sum];
+	}
 }
 
 /**
